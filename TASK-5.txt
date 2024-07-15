@@ -1,0 +1,207 @@
+TASK:-5
+
+Description:
+Build a basic calculator application that can
+perform simple arithmetic operations like addition,
+subtraction, multiplication, and division.
+Implementation:
+1. Create React components for the calculator interface,
+number, and operation buttons.
+2. Use React state (useState hook) to manage the
+input and output of the calculator.
+3. Implement event handlers for button clicks to update
+the input and perform calculations.
+4. Style the calculator using CSS for a user-friendly
+interface.
+
+Program:-
+
+1. Set Up the React App
+First, create a new React app using Create React App:
+
+sh
+npx create-react-app calculator-app
+cd calculator-app
+2. Update the App Component
+Replace the content of src/App.js with the following:
+
+jsx
+// src/App.js
+import React from 'react';
+import Calculator from './Calculator';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <Calculator />
+    </div>
+  );
+}
+
+export default App;
+3. Create the Calculator Component
+Create a new file src/Calculator.js and add the following code:
+
+jsx
+// src/Calculator.js
+import React, { useState } from 'react';
+import './Calculator.css';
+
+function Calculator() {
+  const [input, setInput] = useState('');
+  const [result, setResult] = useState('');
+
+  const handleButtonClick = (value) => {
+    setInput((prevInput) => prevInput + value);
+  };
+
+  const handleClear = () => {
+    setInput('');
+    setResult('');
+  };
+
+  const handleCalculate = () => {
+    try {
+      setResult(eval(input));
+    } catch (error) {
+      setResult('Error');
+    }
+  };
+
+  return (
+    <div className="calculator">
+      <div className="display">
+        <div className="input">{input}</div>
+        <div className="result">{result}</div>
+      </div>
+      <div className="buttons">
+        <button onClick={() => handleButtonClick('1')}>1</button>
+        <button onClick={() => handleButtonClick('2')}>2</button>
+        <button onClick={() => handleButtonClick('3')}>3</button>
+        <button onClick={() => handleButtonClick('+')}>+</button>
+        <button onClick={() => handleButtonClick('4')}>4</button>
+        <button onClick={() => handleButtonClick('5')}>5</button>
+        <button onClick={() => handleButtonClick('6')}>6</button>
+        <button onClick={() => handleButtonClick('-')}>-</button>
+        <button onClick={() => handleButtonClick('7')}>7</button>
+        <button onClick={() => handleButtonClick('8')}>8</button>
+        <button onClick={() => handleButtonClick('9')}>9</button>
+        <button onClick={() => handleButtonClick('*')}>*</button>
+        <button onClick={() => handleButtonClick('0')}>0</button>
+        <button onClick={() => handleButtonClick('.')}>.</button>
+        <button onClick={handleCalculate}>=</button>
+        <button onClick={() => handleButtonClick('/')}>/</button>
+        <button onClick={handleClear}>C</button>
+      </div>
+    </div>
+  );
+}
+
+export default Calculator;
+4. Create CSS for the Calculator Component
+Create a new file src/Calculator.css and add the following CSS:
+
+css
+/* src/Calculator.css */
+.calculator {
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border-radius: 4px;
+}
+
+.input {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.result {
+  font-size: 2em;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.buttons button {
+  padding: 20px;
+  font-size: 1.2em;
+  border: none;
+  background-color: #eee;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  background-color: #ddd;
+}
+
+.buttons button:active {
+  background-color: #ccc;
+}
+
+.buttons button:nth-child(4n) {
+  background-color: #ff8c00;
+  color: white;
+}
+
+.buttons button:nth-child(4n):hover {
+  background-color: #ff7b00;
+}
+
+.buttons button:nth-child(4n):active {
+  background-color: #ff6a00;
+}
+5. Update CSS for the Main App
+Replace the content of src/App.css with the following:
+
+css
+/* src/App.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+6. Ensure Index File is Properly Set Up
+Replace the content of src/index.js with the following:
+
+jsx
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+7. Start the React Application
+Finally, start the React application:
+
+sh
+npm start
